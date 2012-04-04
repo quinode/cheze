@@ -1,0 +1,118 @@
+{% extends "shop/base.html" %}
+{% comment %}
+-------------------------------------------------------------------
+This is the base product detail page.
+To modify the templates of specific types of products, such as
+ProductVariations or CustomProducts, look for product/detail_xxx.html
+-------------------------------------------------------------------
+{% endcomment %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% load app_plugins %}
+
+{% block extra-head %}
+{% if product.meta %}
+    <meta name="description" content="{{product.meta}}">
+{% endif %}
+{% endblock %}
+
+{% block title %}{{ product.translated_name  }}{% endblock %}
+
+{% block content %}
+<div class="grid_12 blanc">
+
+
+{% block navbar %}
+    <ul id="navbar">
+    <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
+    {% for name, url in product.category.all.0.get_url_name %}
+        <li><a href="{{ url }}">{{ name }}</a></li>
+    {% endfor %}
+    <li>{{ product.translated_name }}</li>
+    </ul>
+{% endblock %}
+<h3>{{ product.translated_name }}</h3>
+
+</div>
+
+<div class="grid_5 blanc">    
+    {% for pic in product.productimage_set.all %}
+        {% thumbnail pic.picture 380x380 as image %}
+        <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
+    {% endfor %}
+    
+</div>
+
+<div class="grid_7 blanc">
+    <p>{{ product.description|safe }}</p>
+
+<br/>
+    <table class="attributes" cellspacing="0" cellpadding="0" border="1">
+    {% with product.translated_attributes as atts %}
+        {% if atts %}
+            {% for att in product.translated_attributes %}
+            <tr><th>{{ att.description }}</th><td>{{ att.value }}</td></tr>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% if product.matiere_set.all %}
+        {% for m in product.matiere_set.all %}
+        <tr><th>Matière</th><td>{{ m.name }}</td></tr>
+        {% endfor %}
+    {% endif %}
+    {% if product.fabricant_set.all %}
+        {% for m in product.fabricant_set.all %}
+        <tr><th>Fabricant</th><td>{{ m.name }}</td></tr>
+        {% endfor %}
+    {% endif %}
+    
+    </table>
+</div>
+
+<div class="grid_12 blanc">
+<br/>
+
+{% if product.related_items %}
+
+
+{% for related in product.related_items.all %} 
+    {% if forloop.first %} <ul>  {% endif %}
+        <li class="grid_4"><div class="product_listing">
+            
+            <div class="product_wrapper">
+            
+            {% thumbnail related.main_image.picture 85x85 as image %}
+            <a href="{{ related.get_absolute_url }}">
+            <img src="{{ image }}" alt="{{ related.translated_name }}" /></a>
+            <span class="minidesc">
+            
+                <a href="{{ related.get_absolute_url }}">{{ related.translated_name }}</a>
+                <br/>
+                {% if related.category %}<span class="listed_in">
+                    {% for cat in related.category.all %}
+                    {{ cat.name }}{% if not forloop.last %} - {% endif %}
+                    {% endfor %}
+                    </span><br/>
+                {% endif %}
+                {% for attr in related.productattribute_set.all %}
+                {% if attr.name == 'matiere' or attr.name == 'dimensions' %}
+                {{ attr.value }}<br/>
+                {% endif %}
+                {% endfor %}
+        </span>
+        </div>
+        </div></li>
+    {% if forloop.last %} </ul> {% endif %}
+{% endfor %}
+
+
+
+
+
+{% endif %}
+<br/>
+</div>
+{% endblock %}

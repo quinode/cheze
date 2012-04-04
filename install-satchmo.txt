@@ -1,0 +1,15 @@
+pip install django
+pip install pycrypto
+pip install http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
+pip install PyYAML
+pip install hg+https://bitbucket.org/bkroeze/django-threaded-multihost
+pip install hg+https://bitbucket.org/bkroeze/django-caching-app-plugins
+pip install sorl-thumbnail==3.2.5
+pip install hg+https://bitbucket.org/bkroeze/django-signals-ahoy
+pip install hg+https://bitbucket.org/bkroeze/django-keyedcache
+pip install hg+https://bitbucket.org/hynekcer/django-registration
+pip install hg+https://bitbucket.org/chris1610/satchmo
+pip install django-admin-tools
+pip install django-extensions
+python -c 'import random; print "".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])'
+

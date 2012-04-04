@@ -1,0 +1,118 @@
+/* @override http://localhost:8000/static/themes/chezeslider/chezeslider.css */
+
+/*
+Skin Name: Orman Theme
+Skin URI: http://nivo.dev7studios.com
+Skin Type: fixed
+Image Width: 568
+Image Height: 268
+Description: A light and green skin for the Nivo Slider.
+Version: 1.0
+Author: Gilbert Pellegrom & Orman Clark
+Author URI: http://dev7studios.com
+*/
+
+.theme-chezeslider.slider-wrapper {
+    background:url(slider.png) no-repeat;
+    width:900px;
+    height:350px;
+    margin: 40px auto 0;
+    position:relative;
+}
+
+.theme-chezeslider .nivoSlider {
+    position:relative;
+    width:900px;
+    height:276px;
+    background:url(loading.gif) no-repeat 50% 50%;
+}
+.theme-chezeslider .nivoSlider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+    width:900px; /* Make sure your images are the same size */
+    height:276px; /* Make sure your images are the same size */
+}
+.theme-chezeslider .nivoSlider a {
+    border:0;
+    display:block;
+}
+
+.theme-chezeslider .nivo-controlNav {
+    position:absolute;
+	bottom: -30px;
+	left: 45%;
+}
+.theme-chezeslider .nivo-controlNav a {
+    display:block;
+    width:10px;
+    height:10px;
+    background:url(bullets.png) no-repeat;
+    text-indent:-9999px;
+    border:0;
+    margin-right:7px;
+    float:left;
+}
+.theme-chezeslider .nivo-controlNav a.active {
+    background-position:0 -10px;
+}
+
+.theme-chezeslider .nivo-directionNav a {
+	display:block;
+	width:25px;
+	height:200px;
+	background:url(arrows.png) no-repeat 0% 50%;
+	text-indent:-9999px;
+	border:0;
+    top:40px;
+}
+.theme-chezeslider a.nivo-nextNav {
+	background-position:100% 50%;
+	right: -24px;
+	padding-right: 20px;
+}
+.theme-chezeslider a.nivo-prevNav {
+	left: -20px;
+    padding-left:20px;
+}
+
+.theme-chezeslider .nivo-caption {
+    font-family: Arial Black,sans-serif;
+	position: relative;
+	text-align: right;
+	color: black;
+	float: right;
+	margin-top: 50px;
+	background-color: white;
+	-webkit-border-top-left-radius: 9px;
+-webkit-border-bottom-left-radius: 9px;
+-moz-border-radius-topleft: 9px;
+-moz-border-radius-bottomleft: 9px;
+border-top-left-radius: 9px;
+border-bottom-left-radius: 9px;
+	padding: 10px;
+	width: 30%;
+}
+
+.theme-chezeslider .nivo-caption p{
+	font-size: 20px;
+	line-height: 24px;
+}
+
+.theme-chezeslider .nivo-caption a { 
+    color: #253bcf;
+    border-bottom:1px dotted #fff;
+}
+.theme-chezeslider .nivo-caption a:hover { 
+    color:#fff;
+}
+
+.theme-chezeslider .ribbon {
+    background:url(ribbon.png) no-repeat;
+    width:111px;
+    height:111px;
+    position:absolute;
+    top:-3px;
+    z-index:300;
+}

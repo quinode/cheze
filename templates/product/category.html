@@ -1,0 +1,129 @@
+{% extends "shop/base.html" %}
+{% load i18n contains %}
+{% load thumbnail %}
+{% load satchmo_category %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+
+{% block extra-head %}
+{% if category.meta %}
+    <meta name="description" content="{{ category.meta|escape }}">
+{% endif %}
+
+
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript" src="{{media_url}}js/jquery.biggerlink.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("div.sous-cat").biggerlink();
+            $("div.product_listing").biggerlink();
+        })
+    </script>
+{% endblock %}
+
+
+{% block content %}
+<div class="grid_12 blanc product_category_header">
+
+
+    {% block navbar %}
+    <ul id="navbar">
+        <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
+        {% for parent in category.parents %}<li><a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a></li>{% endfor %}
+        <li>{{ category.name }}</li>
+    </ul>   
+    {% endblock %}
+
+
+    {% if category.main_image %}
+        <img align="left" src="{{media_url}}/{{ category.main_image.picture }}" 
+            width="{{ category.main_image.picture.width }}" 
+            height="{{ category.main_image.picture.height }}" 
+            style="padding-right:20px"
+            alt="{{ category.name }}"/>
+    {% endif %}
+    
+
+    <h3>{{ category.name }}</h3>
+    {% if category.description %}
+        <p class="product_category_description">{{ category.description|safe}}</p>
+    {% endif %}
+
+</div>
+
+<div id="product_category">
+
+{% if category.slug|contains:'collections-' %}
+
+    {% for cat in child_categories %}
+        {% if cat.parent.slug|contains:'collections-' %}
+            <div class="grid_3 sous-cat">
+                <h4>{{cat.translated_name}}</h4>
+                {% thumbnail cat.main_image.picture 200 as image %}
+                <a href="{{ cat.get_absolute_url }}">
+                    <img src="{{media_url}}/{{ cat.main_image.picture }}" 
+                        width="{{ cat.main_image.picture.width }}" 
+                        height="{{ cat.main_image.picture.height }}" 
+                        alt="{{cat.name}}" /></a>
+            </div> 
+        {% endif %}   
+    {% endfor %}
+    
+
+{% else %}
+
+    {% if child_categories %}
+            {% for cat in child_categories %}
+            <div class="grid_3 sous-cat">
+                <h4>{{cat.translated_name}}</h4>
+                <a href="{{ cat.get_absolute_url }}">
+                    <img src="{{media_url}}/{{ cat.main_image.picture }}" 
+                        width="{{ cat.main_image.picture.width }}" 
+                        height="{{ cat.main_image.picture.height }}" 
+                        alt="{{cat.name}}" /></a>
+            </div>    
+            {% endfor %}
+    {% endif %}
+
+{% endif %}
+
+
+    
+    {% for product in products %} 
+        {% if forloop.first %} <ul>  {% endif %}
+            <li class="grid_4"><div class="product_listing">
+                
+                <div class="product_wrapper">
+                
+                {% thumbnail product.main_image.picture 85x85 as image %}
+                <a href="{{ product.get_absolute_url }}">
+                <img src="{{ image }}" alt="{{ product.translated_name }}" /></a>
+                <span class="minidesc">
+                
+                    <a href="{{ product.get_absolute_url }}">{{ product.translated_name }}</a>
+                    <br/>
+                    {% if product.category %}<span class="listed_in">
+                        {% for cat in product.category.all %}
+                        {{ cat.name }}{% if not forloop.last %} - {% endif %}
+                        {% endfor %}
+                        </span><br/>
+                    {% endif %}
+                    {% for attr in product.productattribute_set.all %}
+                    {% if attr.name == 'matiere' or attr.name == 'dimensions' %}
+                    {{ attr.value }}<br/>
+                    {% endif %}
+                    {% endfor %}
+            </span>
+            </div>
+            </div></li>
+        {% if forloop.last %} </ul> {% endif %}
+    {% endfor %}
+    
+    
+</div>
+<br/><br/>
+
+
+{% endblock %}

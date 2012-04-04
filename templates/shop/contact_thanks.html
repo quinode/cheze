@@ -1,0 +1,18 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block navbar %}
+   <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
+   <li>{% trans "Contact Us" %}</li>
+{% endblock %}
+
+{% block content %}
+<div class="grid_12 blanc">
+
+
+<h3>Merci ! </h3>
+
+<p>Nous avons bien receptionné votre demande et vous recontactons le plus rapidement possible</p>
+
+</div>
+{% endblock %}

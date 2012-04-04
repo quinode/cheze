@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'JamesFajardoRegular';
+    src: url('/static/fonts/james_fajardo-webfont.eot');
+    src: url('/static/fonts/james_fajardo-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/james_fajardo-webfont.woff') format('woff'),
+         url('/static/fonts/james_fajardo-webfont.ttf') format('truetype'),
+         url('/static/fonts/james_fajardo-webfont.svg#JamesFajardoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

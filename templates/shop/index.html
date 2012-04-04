@@ -1,0 +1,48 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_util %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block extra-head %}
+    <link rel="stylesheet" href="{{media_url}}css//nivo-slider.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{{media_url}}themes/chezeslider/chezeslider.css" type="text/css" media="screen" />
+{% endblock %}
+
+
+{% block javascript %}
+    <script type="text/javascript" src="{{media_url}}js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>
+{% endblock %}
+
+
+{% block content %}
+<div class="grid_12">
+
+    <div class="slider-wrapper theme-chezeslider">
+        <div class="ribbon"></div>
+            <div id="slider" class="nivoSlider">
+                <a href="/categorie/materiaux/"><img src="{{media_url}}slider/slide_materiaux.jpg" alt="" title="#brico_caption" /></a>
+                <a href="/categorie/electro-menager/"><img src="{{media_url}}slider/slide_electro.jpg" alt="" title="#brico_caption" /></a>
+                <a href="/categorie/motoculture/"><img src="{{media_url}}slider/slide_motoculture.jpg" alt="" title="#brico_caption" /></a>
+                <a href="/categorie/bricolage/"><img src="{{media_url}}slider/slide_bricolage.jpg" alt="" title="#brico_caption" /></a>
+                <a href="/categorie/jardin/"><img src="{{media_url}}slider/slide_jardin2.jpg" alt="" title="#brico_caption" /></a>
+
+
+            </div>
+            <div id="brico_caption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+            </div>
+        </div>
+
+</div>
+
+{% endblock %}
+
+
+
