@@ -109,5 +109,24 @@
             "description": "Shipping", 
             "title": "Shipping"
         }
+    }, 
+    {
+        "pk": 1, 
+        "model": "shop.config", 
+        "fields": {
+            "city": "", 
+            "sales_country": 74, 
+            "phone": "", 
+            "street1": "", 
+            "street2": "", 
+            "shipping_countries": [], 
+            "store_name": "CHEZE SAS", 
+            "state": "", 
+            "postal_code": "", 
+            "store_description": "", 
+            "country": 74, 
+            "store_email": "contact@cheze.fr", 
+            "in_country_only": true
+        }
     }
 ]
