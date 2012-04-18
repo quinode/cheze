@@ -31,15 +31,17 @@
                 <ul class="nav">
                     <li class="{% active request "/" %}"><a href="/">Accueil</a></li>
                     {% for c in categories %}
+                    {% if not c.parents %}
                     <li class="cat {% active request c.get_absolute_url %}"><a href="{{c.get_absolute_url}}">{{c.name}}</a>
-                    {% if c.get_all_children %}
-                        <ul class="subcats">
-                            {% for sc in c.get_all_children %}
+                        {% if c.get_active_children %}
+                        <!--ul class="subcats">
+                            {% for sc in c.get_active_children %}
                             <li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a></li>
                             {% endfor %}
-                            </ul>
-                    {% endif %}
+                        </ul-->
+                        {% endif %}
                     </li>
+                    {% endif%}
                     {% endfor %}
                     <li class="{% active request "/contact/" %}"><a href="/contact/">Contact</a></li>
                 </ul>
@@ -48,142 +50,81 @@
         </div>
     </div>
 
-
-
-
      <div class="container_12">
         <div id="page">
-            
             
             {% block content %}
             <div class="grid_9 blanc">
                 {% block navbar %}
                 {% endblock %}
                 <!--contenu-->
-        
             </div>
             {% endblock %}
             
-
-
-    {% block colonne %}
-    {% endblock %}
-
+            {% block colonne %}
+            {% endblock %}
 
         </div>
-
-
-
         <div class="clear"></div>
 
         <div id="footer">
             {% block footer %}
-            
-
-            
             <div class="grid_4">
-                
-                <div id="coord">
-                <!--<img src="{{ media_url }}images/logo_gris.jpg" alt="Tendance Garden"/>-->
-                
-                <img src="{{media_url}}images/magasin.jpg" width="190"/>
-                <br/><br/>
-                
-                <address>
-                       <a href="http://maps.google.fr/maps?q=rue+de+milan+lempdes&hl=fr&ll=45.776099,3.205004&spn=0.008561,0.021136&sll=46.75984,1.738281&sspn=8.611865,21.643066&vpsrc=6&t=h&z=16">    
-                       <img id="carte" src="{{media_url}}images/carte.png">
-                       </a>   
-                    <strong>Tendance Garden</strong><br/>
-                    Rue de Milan<br/>
-                    63370 Lempdes<br/><br/>
-                    <b class="tel">Tel : 04 73 61 65 45</b><br/>
-                    <a id="email" href="/contact/">contactez-nous par email</a>
-                    
-                </address>
+                <div class="clearfix">
+                    <div class="picture">
+                        <img src="{{media_url}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                    </div>
+                    <div class="coord">
+                        <address>
+                            <strong>CHEZE SAS</strong><br/>
+                            Za les Varenne<br />
+                            Route St Bonnet<br/>
+                            03450 Ebreuil<br/><br/>
+                            <span class="tel">Tel : 04 70 90 72 11</span><br/>
+                            <span class="fax">Fax : 04 70 90 75 32</span><br/>
+                            <a class="email" href="@maito:cheze.jm@cheze-sas.com">cheze.jm@cheze-sas.com</a>
+                        </address>
+                    </div>
                 </div>
             </div>
             
-            <div class="footlinks grid_2">
-                {% regroup categories by parent as cat_list %}
-                
-                <h3>INTERIEUR / INDOOR</h3>
-                <ul>
-                {% for c in categories %}
-                {%  if c.parent.slug == 'collections-interieur' %}                
-                    <li><a href="{{c.get_absolute_url}}">{{c.name}}</a>
-                    {% if c.get_all_children %}
-                        <ul class="bulls">
-                            {% for sc in c.get_all_children %}
-                            <li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a></li>
-                            {% endfor %}
-                            </ul>
-                    {% endif %}
-                    </li>
-                {% endif %}
-                {% endfor %}
-                </ul>
+            <div class="grid_4">
+                <div class="clearfix">
+                    <div class="picture">
+                        <img src="{{media_url}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                    </div>
+                    <div class="coord">
+                        <address>
+                            <strong>Brico Service</strong><br/>
+                            Rue Paroueix<br />
+                            63380 Pontaumur<br/><br/>
+                            <span class="tel">Tel : 04 73 79 79 73</span><br/>
+                        </address>
+                    </div>
+                </div>
             </div>
 
-
-            <div class="footlinks grid_2">
-                <h3>EXTERIEUR / OUTDOOR</h3>
-                <ul>
-                {% for c in categories %}
-                {%  if c.parent.slug == 'collections-exterieur' %}                
-                    <li><a href="{{c.get_absolute_url}}">{{c.name}}</a>
-                    {% if c.get_all_children %}
-                        <ul class="bulls">
-                            {% for sc in c.get_all_children %}
-                            <li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a></li>
-                            {% endfor %}
-                            </ul>
-                    {% endif %}
-                    </li>
-                {% endif %}
-                {% endfor %}
-                </ul>
+            <div class="grid_4">
+                <div class="clearfix">
+                    <div class="picture">
+                        <img src="{{media_url}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                    </div>
+                    <div class="coord">
+                        <address>
+                            <strong>CHEZE</strong><br/>
+                            167 Rue Jean Jaur&egrave;s<br/>
+                            63700 Saint-&Eacute;loy-les-Mines<br/><br/>
+                            <span class="tel">Tel : 04 73 79 79 73</span><br/>
+                        </address>
+                    </div>
+                </div>
             </div>
-
-            <div class="footlinks grid_2">
-                <h3>TOUS LES MEUBLES</h3>
-                <ul class="bulls">
-                {% for c in categories %}
-                {%  if c.parent.slug == 'articles' %}                
-                    <li><a href="{{c.get_absolute_url}}">{{c.name}}</a>
-                    {% if c.get_all_children %}
-                        <ul class="bulls">
-                            {% for sc in c.get_all_children %}
-                            <li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a></li>
-                            {% endfor %}
-                            </ul>
-                    {% endif %}
-                    </li>
-                {% endif %}
-                {% endfor %}
-                </ul>
-            </div>
-
-            <div class="footlinks grid_2">
-                <h3>FABRICANTS</h3>
-                <ul class="bulls">
-                {% for f in fabricants %}
-                    <li><a href="{{f.get_absolute_url}}">{{f.name}}</a></li>
-                {% endfor %}
-                </ul>
-
-                <h3>MATIERES</h3>
-                <ul class="bulls">
-                {% for m in matieres %}
-                    <li><a href="{{m.get_absolute_url}}">{{m.name}}</a></li>
-                {% endfor %}
-                </ul>
-            </div>
-        
-        {% endblock %}
-        <p id="w3c">
-            <a href="http://validator.w3.org/check?uri=referer"><img
-              src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
-          </p>
+            <div class="clear"></div>
+            {% endblock %}
+            <p id="w3c">
+                <a href="http://validator.w3.org/check?uri=referer"><img
+                  src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+            </p>
         </div>
 
     </div>

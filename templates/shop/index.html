@@ -6,7 +6,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block extra-head %}
-    <link rel="stylesheet" href="{{media_url}}css//nivo-slider.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{{media_url}}css/nivo-slider.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{{media_url}}themes/chezeslider/chezeslider.css" type="text/css" media="screen" />
 {% endblock %}
 
@@ -22,26 +22,64 @@
 
 
 {% block content %}
-<div class="grid_12">
+<div id="index" class="grid_12">
 
     <div class="slider-wrapper theme-chezeslider">
         <div class="ribbon"></div>
-            <div id="slider" class="nivoSlider">
-                <a href="/categorie/materiaux/"><img src="{{media_url}}slider/slide_materiaux.jpg" alt="" title="#brico_caption" /></a>
-                <a href="/categorie/electro-menager/"><img src="{{media_url}}slider/slide_electro.jpg" alt="" title="#brico_caption" /></a>
-                <a href="/categorie/motoculture/"><img src="{{media_url}}slider/slide_motoculture.jpg" alt="" title="#brico_caption" /></a>
-                <a href="/categorie/bricolage/"><img src="{{media_url}}slider/slide_bricolage.jpg" alt="" title="#brico_caption" /></a>
-                <a href="/categorie/jardin/"><img src="{{media_url}}slider/slide_jardin2.jpg" alt="" title="#brico_caption" /></a>
-
-
-            </div>
-            <div id="brico_caption" class="nivo-html-caption">
-                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-            </div>
+        <div id="slider" class="nivoSlider">
+            <a href="/categorie/materiaux/"><img src="{{media_url}}slider/slide_materiaux.jpg" alt="" title="#brico_caption" /></a>
+            <a href="/categorie/electro-menager/"><img src="{{media_url}}slider/slide_electro.jpg" alt="" title="#brico_caption" /></a>
+            <a href="/categorie/motoculture/"><img src="{{media_url}}slider/slide_motoculture.jpg" alt="" title="#brico_caption" /></a>
+            <a href="/categorie/bricolage/"><img src="{{media_url}}slider/slide_bricolage.jpg" alt="" title="#brico_caption" /></a>
+            <a href="/categorie/jardin/"><img src="{{media_url}}slider/slide_jardin2.jpg" alt="" title="#brico_caption" /></a>
         </div>
-
+        <div id="brico_caption" class="nivo-html-caption">
+            <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_8 omega">
+        <h2>&ldquo;Ch&egrave;ze SAS, bricolage, mat&eacute;riaux, motoculture et &eacute;lectro-m&eacute;nager dans le Puy-de-D&ocirc;me&rdquo;</h2>
+        <div class="grid_4 alpha">
+            <p>Bienvenu &agrave; la Soci&eacute;t&eacute; Ch&egrave;ze est situ&eacute; &agrave Ebreuil dans l'Allier, sp&eacute;cialis&eacute;e dans le domaine du commerce de mat&eacute;riel divers. Venez d&eacute;couvrir une grande surface de bricolage &agrave; la campagne, nous vous aiderons et r&eacute;pondrons &agrave; vos besoins.</p>
+            <p>Tout pour la maison de A &agrave; Z, de la constrcution &agrave; la r&eacute;novation, de l'agencement &agrave; l'&eacute;quipement int&eacute;rieur et ext&eacute;rieur.</p>
+        </div>
+        <div class="grid_4 alpha omega">
+            <p>Nous vous proposons &eacute;galement un service de location de bennes, ainsi qu'une location mat&eacute;riel.</p>
+            <p>Nous sommes une entreprise familliale créée en 1972 par Mr et Mme Ch&egrave;ze, reprise en 2005 par les enfants. Elle compte actuellement 35 salari&eacute;s. Depuis 2010 un deuxi&egrave;me magasin est &agrave; votre disposition &agrave; Saint-&Eacute;loy-les-Mines. Pour tous renseignements compl&eacute;mentaires, contactez-nous.</p>
+        </div>
+        <div class="clear"></div>
+        <div class="grid_4 alpha">
+            <div class="box-1-left"></div>
+            <div class="box-middle">
+                <h3>Conseil</h3>
+            </div>
+            <div class="box-1-right"></div>
+            <div class="clear"></div>
+        </div>
+        <div class="grid_4 alpha omega">
+            <div class="box-2-left"></div>
+            <div class="box-middle">
+                <h3>Qualit&eacute;</h3>
+            </div>
+            <div class="box-2-right"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="grid_4 alpha">
+        <div id="map">
+            <iframe width="300" height="362" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.fr/maps/ms?msa=0&amp;msid=200975920678048079202.0004bd0393e9a1ac4ef5f&amp;ie=UTF8&amp;t=m&amp;ll=46.002685,2.837219&amp;spn=0.69064,0.821228&amp;z=9&amp;output=embed"></iframe>
+        </div>
+        <div class="box-3">
+            <div class="box-3-middle">
+                <h3>3 Enseignes</h3>
+            </div>
+            <div class="box-3-right"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
 </div>
-
 {% endblock %}
 
 
