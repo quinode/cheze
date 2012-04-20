@@ -1,7 +1,6 @@
 {% extends "shop/base.html" %}
 {% load i18n contains %}
-{% load thumbnail %}
-{% load satchmo_category %}
+{% load thumbnail satchmo_category categories%}
 
 {% block title %}{{ category.name }}{% endblock %}
 
@@ -14,7 +13,7 @@
 
 {% endblock %}
 {% block javascript %}
-    <script type="text/javascript" src="{{media_url}}js/jquery.biggerlink.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.biggerlink.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $("div.sous-cat").biggerlink();
@@ -37,57 +36,32 @@
     {% endblock %}
 
 
-    {% if category.main_image %}
-        <img align="left" src="{{media_url}}/{{ category.main_image.picture }}" 
-            width="{{ category.main_image.picture.width }}" 
-            height="{{ category.main_image.picture.height }}" 
-            style="padding-right:20px"
-            alt="{{ category.name }}"/>
-    {% endif %}
-    
-
     <h3>{{ category.name }}</h3>
     {% if category.description %}
         <p class="product_category_description">{{ category.description|safe}}</p>
     {% endif %}
 
 </div>
+<div class="all_cats">
+{% categories active=category from_level=1 select_parents=1 %}
+</div>
 
 <div id="product_category">
 
-{% if category.slug|contains:'collections-' %}
 
-    {% for cat in child_categories %}
-        {% if cat.parent.slug|contains:'collections-' %}
-            <div class="grid_3 sous-cat">
-                <h4>{{cat.translated_name}}</h4>
-                {% thumbnail cat.main_image.picture 200 as image %}
-                <a href="{{ cat.get_absolute_url }}">
-                    <img src="{{media_url}}/{{ cat.main_image.picture }}" 
-                        width="{{ cat.main_image.picture.width }}" 
-                        height="{{ cat.main_image.picture.height }}" 
-                        alt="{{cat.name}}" /></a>
-            </div> 
-        {% endif %}   
-    {% endfor %}
-    
-
-{% else %}
 
     {% if child_categories %}
             {% for cat in child_categories %}
             <div class="grid_3 sous-cat">
                 <h4>{{cat.translated_name}}</h4>
                 <a href="{{ cat.get_absolute_url }}">
-                    <img src="{{media_url}}/{{ cat.main_image.picture }}" 
+                    <img src="{{STATIC_URL}}/{{ cat.main_image.picture }}" 
                         width="{{ cat.main_image.picture.width }}" 
                         height="{{ cat.main_image.picture.height }}" 
                         alt="{{cat.name}}" /></a>
             </div>    
             {% endfor %}
     {% endif %}
-
-{% endif %}
 
 
     

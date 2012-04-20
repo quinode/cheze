@@ -35,6 +35,8 @@ class ToutfaireSpider(BaseSpider):
         ),
     )
 
+    breadcrumb_current_item_is_a_link = True
+
     def change_page(self, response):
         self.parse(response)
 
@@ -45,7 +47,7 @@ class ToutfaireSpider(BaseSpider):
         i[settings["FIELD_DESCRIPTION"]] = self.extract(hxs.select('//div[@id="block-product"]/div[@class="content"]/div[@class="desc"]/div[@class="first"]/p/text()'))
         i[settings['FIELD_SHORT_DESCRIPTION']] = None
         i[settings["FIELD_PRICE"]] = self.get_price(hxs.select('//div[@id="block-product"]/div[@class="content"]/div[@class="desc"]/div[@class="last"]/div[@class="price"]/strong'))
-        i[settings["FIELD_CATEGORY"]] = self.get_category(hxs.select('//div[@id="banner"]/h1/text()'), 'materiaux')
+        i[settings["FIELD_CATEGORY"]] = self.get_category(hxs.select('//div[@id="banner"]/h1/text()'), {'name': 'Matériaux', 'slug': 'materiaux'})
         i[settings['FIELD_PRODUCT_URL']] = response.url
         i[settings["FIELD_IMAGE_URL"]] = self.extract(hxs.select('//div[@id="block-product"]/div[@class="picture"]/div[@class="thumbs-images"]/div[@id="thumb_01"]/a/img/@src'))
         return i

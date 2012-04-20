@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from scrapy.conf import settings
 from scrapy.contrib_exp.djangoitem import DjangoItem
 from scrapy.item import Field
@@ -15,13 +16,17 @@ class ChezesasItem(DjangoItem):
     category = Field()
     images = Field()
     product_url = Field()
+    reference = Field()
+    manufacturer = Field()
 
     def save(self, commit=True):
         django_item = super(ChezesasItem, self).save(commit=False)
 
         try:
+            # on tente de retrouver le meme item
             productattribute = django_item.productattribute_set.get(value=self[settings['FIELD_PRODUCT_URL']])
             older_item = productattribute.product
+            # mise à jour en réutilisant la PK
             django_item.pk = older_item.pk
             django_item.category.clear()
             django_item.price_set.clear()
@@ -29,11 +34,17 @@ class ChezesasItem(DjangoItem):
             django_item.productattribute_set.clear()
             django_item.save()
         except ProductAttribute.DoesNotExist:
-            if commit:
+            # cet article n'est pas encore en base
+            if commit:  # donc on commence par le sauver
                 django_item.save()
-            django_item.category.add(self[settings['FIELD_CATEGORY']])
+            if self[settings['FIELD_CATEGORY']]:
+                django_item.category.add(self[settings['FIELD_CATEGORY']])  # on lui adjoint une catégorie
             if self[settings['FIELD_PRICE']]:
                 django_item.price_set.add(self[settings['FIELD_PRICE']])
+            # attributs optionnels
+            for field in ('FIELD_REFERENCE', 'FIELD_MANUFACTURER'):
+                if settings[field] in self.keys():
+                    self.save_product_attribute(settings[field], django_item)
             self.save_image(django_item)
             self.save_product_url(django_item)
         return django_item
@@ -51,6 +62,12 @@ class ChezesasItem(DjangoItem):
         except:
             pass
 
+    def save_product_attribute(self, att_name, django_item):
+        # print 'getting ' + att_name
+        option, created = AttributeOption.objects.get_or_create(name=att_name, defaults={'description': att_name, 'validation': "product.utils.validation_simple"})
+        ProductAttribute(product=django_item, option=option, value=self[att_name]).save()
+
     def save_product_url(self, django_item):
-        option, created = AttributeOption.objects.get_or_create(name="product_url", defaults={'description': "Product url", 'validation': "product.utils.validation_simple"})
+        option, created = AttributeOption.objects.get_or_create(name="product_url", defaults={'description': "URL", 'validation': "product.utils.validation_simple"})
         ProductAttribute(product=django_item, option=option, value=self[settings['FIELD_PRODUCT_URL']]).save()
+

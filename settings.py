@@ -3,7 +3,7 @@
 # This is a recommended base setting for further customization
 import os
 
-DIRNAME = os.path.dirname(__file__)
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 DJANGO_PROJECT = 'cheze'
 DJANGO_SETTINGS_MODULE = 'cheze.settings'
@@ -25,10 +25,35 @@ LANGUAGE_CODE = 'fr-FR'
 
 SITE_ID = 1
 
-MEDIA_ROOT = os.path.join(DIRNAME, 'static/')
-MEDIA_URL = "/static/"
-ADMIN_MEDIA_PREFIX = '/media/'
+STATIC_ROOT = os.path.abspath(PROJECT_PATH + '/static_collected/')
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.abspath(PROJECT_PATH + '/media/')
+MEDIA_URL = '/media/'
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+# MEDIA_ROOT = os.path.join(PROJECT_PATH, 'static/')
+# MEDIA_URL = "/static/"
+
+# ADMIN_MEDIA_PREFIX = '/media/'
+
 SECRET_KEY = 'tb%=#%^d7o^93^m$u%g+$z8d=^1#vtk&v2hzr$--4^7y6f^pxk'
+
+
+import admin_tools
+ADMIN_TOOLS_PATH = os.path.dirname(os.path.abspath(admin_tools.__file__))
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+STATICFILES_DIRS = (
+    os.path.abspath(PROJECT_PATH + '/static/'),
+    os.path.abspath(ADMIN_TOOLS_PATH + '/media/'),
+)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -59,17 +84,17 @@ TEMPLATE_CONTEXT_PROCESSORS = ('satchmo_store.shop.context_processors.settings',
                                'django.core.context_processors.debug',
                                'django.core.context_processors.i18n',
                                'django.core.context_processors.media',
+                               'django.core.context_processors.static',
                                'django.contrib.messages.context_processors.messages',
                                'django.core.context_processors.request',
                                #'satchmo_ext.recentlist.context_processors.recent_products',
                                'cheze.context_processors.footer',
                                )
-                           
 
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(DIRNAME, 'templates'),
+    os.path.abspath(PROJECT_PATH + '/templates/'),
 )
 
 AUTOCOMPLETE_MEDIA_PREFIX = '/static/autocomplete/media/'
@@ -146,6 +171,10 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons3': ''
     }
 
+TINYMCE_JS_URL = os.path.join(STATIC_URL, "tiny_mce/tiny_mce.js")
+TINYMCE_JS_ROOT = os.path.join(STATIC_URL + 'tiny_mce')
+
+
 #### Satchmo unique variables ####
 #from django.conf.urls.defaults import patterns, include
 SATCHMO_SETTINGS = {
@@ -171,10 +200,7 @@ L10N_SETTINGS = {
 
 SKIP_SOUTH_TESTS = True
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-SATCHMO_DIRNAME = DIRNAME
+SATCHMO_DIRNAME = PROJECT_PATH
     
 gettext_noop = lambda s: s
 
@@ -202,7 +228,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 # logging.basicConfig(level=logging.DEBUG,
 #                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
 #                     datefmt='%a, %d %b %Y %H:%M:%S',
-#                     filename=os.path.join(DIRNAME,LOGFILE),
+#                     filename=os.path.join(PROJECT_PATH,LOGFILE),
 #                     filemode='w')
 # 
 # logging.getLogger('keyedcache').setLevel(logging.INFO)

@@ -3,8 +3,19 @@ from django.contrib.sites.models import Site
 from livesettings import config_value
 from scrapy.conf import settings
 
+# from scrapy.exceptions import DropItem
 
-class CleanPipiline(object):
+# class GitemAccueil(object):
+
+#     def process_item(self, item, spider):
+#         if item['price']:
+#             if item['price_excludes_vat']:
+#                 item['price'] = item['price'] * self.vat_factor
+#             return item
+#         else:
+#             raise DropItem("Missing price in %s" % item)
+
+class CleanPipeline(object):
     def process_item(self, item, spider):
         item['site'] = Site.objects.get_current()
         item['items_in_stock'] = '0'
@@ -15,6 +26,8 @@ class CleanPipiline(object):
         item['taxable'] = lambda: config_value('TAX', 'PRODUCTS_TAXABLE_BY_DEFAULT')
         item['shipclass'] = "DEFAULT"
 
+        # if item[settings['FIELD_MANUFACTURER']]:
+        #     item[settings['FIELD_MANUFACTURER']] = item[settings['FIELD_MANUFACTURER']].lower().capitalize()
         if item[settings['FIELD_TITLE']]:
             item[settings['FIELD_TITLE']] = item[settings['FIELD_TITLE']].lower().capitalize()
         if item[settings['FIELD_PRICE']]:

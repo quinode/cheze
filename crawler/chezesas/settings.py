@@ -7,7 +7,7 @@ SPIDER_MODULES = ['chezesas.spiders']
 NEWSPIDER_MODULE = 'chezesas.spiders'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 ITEM_PIPELINES = [
-    'chezesas.pipelines.CleanPipiline',
+    'chezesas.pipelines.CleanPipeline',
     'chezesas.pipelines.DBWriterPipeline',
 ]
 
@@ -18,7 +18,7 @@ LOG_LEVEL = 'ERROR'
 ############## CONFIG AJOUTER POUR LE LIEN AVEC DJANGO ##############
 # La valeur de debug permet de limiter le nombre de pages parsées lors du crawl
 #DEBUG = False     # Valeur pour la production. Parse toute les pages pour récupérer tous les items
-DEBUG = False      # Valeur pour les tests. Récupère qu'1 ou 2 pages pour permettre les tests
+DEBUG = True      # Valeur pour les tests. Récupère qu'1 ou 2 pages pour permettre les tests
 
 SITE_ID = 1
 
@@ -26,6 +26,7 @@ SITE_ID = 1
 import os
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 SITE_PATH = '%s/../..' % PROJECT_PATH  # chemin vers le projet Django
+
 
 def setup_django_env(path):
     import imp
@@ -47,7 +48,7 @@ DJANGO_MODEL = Product
 
 # FIELD_*, représente le nom des champs du model Django
 FIELD_TITLE = "name"
-FIELD_MANUFACTURER = "fournisseur"
+FIELD_MANUFACTURER = "manufacturer"
 FIELD_REFERENCE = "reference"
 FIELD_SHORT_DESCRIPTION = "short_description"
 FIELD_DESCRIPTION = "description"

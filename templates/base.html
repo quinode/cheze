@@ -1,22 +1,23 @@
-{% load i18n active satchmo_category satchmo_google satchmo_util app_plugins normalize_decimal %}{% block doctype %}<?xml version="1.0" encoding="UTF-8"?>
+{% load static i18n active satchmo_category satchmo_google satchmo_util app_plugins normalize_decimal %}{% block doctype %}<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 {% endblock %}
 <head>
     {% block stylesheet %}
-        <link rel="stylesheet" href="{{ media_url }}css/reset.css" type="text/css" />
-        <link rel="stylesheet" href="{{ media_url }}css/960.css" type="text/css" />
-        <link rel="stylesheet" href="{{ media_url }}css/font.css" type="text/css" />
-        <link rel="stylesheet" href="{{ media_url }}css/style.css" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/960.css" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font.css" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" type="text/css" />
     {% endblock %}
     <title>{% block title %}Base{% endblock %} - {{ shop_name }}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
     
     {% block extra-head %}{% endblock %}
 
     {% plugin_point "page_head" %}
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+
     {% block javascript %}
     {% endblock %}
 </head>
@@ -26,7 +27,7 @@
     <div id="entete_liserai_gris">
         <div id="entete_liserai_jaune">
             <div id="entete" class="container_12">
-                <img src="{{ media_url }}images/logo-cheze.png" alt="CHEZE SAS" id="logo"/>
+                <img src="{{ STATIC_URL }}images/logo-cheze.png" alt="CHEZE SAS" id="logo"/>
 
                 <ul class="nav">
                     <li class="{% active request "/" %}"><a href="/">Accueil</a></li>
@@ -72,7 +73,7 @@
             <div class="grid_4">
                 <div class="clearfix">
                     <div class="picture">
-                        <img src="{{media_url}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                        <img src="{{STATIC_URL}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
                     </div>
                     <div class="coord">
                         <address>
@@ -91,7 +92,7 @@
             <div class="grid_4">
                 <div class="clearfix">
                     <div class="picture">
-                        <img src="{{media_url}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                        <img src="{{STATIC_URL}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
                     </div>
                     <div class="coord">
                         <address>
@@ -107,7 +108,7 @@
             <div class="grid_4">
                 <div class="clearfix">
                     <div class="picture">
-                        <img src="{{media_url}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                        <img src="{{STATIC_URL}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
                     </div>
                     <div class="coord">
                         <address>

@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import *
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 
 from django.contrib import admin
 admin.autodiscover()
@@ -13,6 +15,7 @@ urlpatterns += patterns('',
     #url(r'^autocomplete/', include(autocomplete.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),    
     #url(r'^fournisseur/([\w-]+)/$', 'localsite.views.fournisseur_list', {}, name="fabricant_list"),
+    url(r'^tinymce/', include('tinymce.urls')),
 )
 
 from satchmo_utils import urlhelper
@@ -24,3 +27,10 @@ urlhelper.replace_urlpatterns(
         url(r'^$', 'localsite.views.home', {}, name='satchmo_shop_home'),
     ]
 )
+
+
+if settings.DEBUG or ('test' in sys.argv):
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),
+    )
