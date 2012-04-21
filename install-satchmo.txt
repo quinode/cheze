@@ -5,6 +5,7 @@ pip install PyYAML
 pip install hg+https://bitbucket.org/bkroeze/django-threaded-multihost
 pip install hg+https://bitbucket.org/bkroeze/django-caching-app-plugins
 pip install sorl-thumbnail==3.2.5
+pip install hg+http://bitbucket.org/bkroeze/django-livesettings
 pip install hg+https://bitbucket.org/bkroeze/django-signals-ahoy
 pip install hg+https://bitbucket.org/bkroeze/django-keyedcache
 pip install hg+https://bitbucket.org/hynekcer/django-registration

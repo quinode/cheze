@@ -78,26 +78,30 @@ Author URI: http://dev7studios.com
 }
 
 .theme-chezeslider .nivo-caption {
-    font-family: Arial Black,sans-serif;
+	
 	position: relative;
-	text-align: right;
 	color: black;
-	float: right;
-	margin-top: 50px;
 	background-color: white;
-	-webkit-border-top-left-radius: 9px;
+
+-webkit-border-bottom-right-radius: 9px;
 -webkit-border-bottom-left-radius: 9px;
--moz-border-radius-topleft: 9px;
+-moz-border-radius-bottomright: 9px;
 -moz-border-radius-bottomleft: 9px;
-border-top-left-radius: 9px;
 border-bottom-left-radius: 9px;
+border-bottom-right-radius: 9px;
+
 	padding: 10px;
 	width: 30%;
+	left: 570px;
+	top: 0;
+	float: left;
 }
 
 .theme-chezeslider .nivo-caption p{
-	font-size: 20px;
-	line-height: 24px;
+	
+	font: italic bold 16px/20px Georgia, "Times New Roman", Times, serif;
+	text-align: center;
+	color: #212121;
 }
 
 .theme-chezeslider .nivo-caption a { 

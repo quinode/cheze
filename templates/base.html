@@ -39,7 +39,7 @@
                     
                     {% for c in categories %}
                     {% if not c.parents %}<li class="cat{% active request c.get_absolute_url %}">
-                        <a href="{{c.get_absolute_url}}" rel="list-{{c.slug}}">{{c.name}}</a>
+                        <a href="{{c.get_absolute_url}}" class="cat-link" rel="list-{{c.slug}}">{{c.name}}</a>
                         {% if c.get_all_children %}<div class="cat_list" id="list-{{c.slug}}">
                             <ul class="subcats level2">
                             {% for sc in c.get_all_children %}
@@ -153,9 +153,10 @@
 <script type="text/javascript">
 $(function(){
 
-    $(".cat_list > ul").easyListSplitter({colNumber:3});
+    $(".cat_list > ul").easyListSplitter({colNumber:4});
 
-    $("li.cat a").click(function(event){
+    $("a.cat_link").click(function(event){
+        $(".cat_list:visible").hide();
         list = $(".cat_list#"+$(this).attr('rel'));
         if(list.is(':hidden')){
             total = list.height() + 140

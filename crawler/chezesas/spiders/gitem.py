@@ -16,7 +16,7 @@ class GitemSpider(BaseSpider):
     ]
     breadcrumb_current_item_is_a_link = False
     root_category_slug = 'accueil'
-    skip_cats = ['a-poser', 'encastrable']
+    skip_cats = ['a-poser', 'encastrable', 'informatique']
 
     rules = (
         Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', restrict_xpaths='//div[@id="menu"]'),
