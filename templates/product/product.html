@@ -24,52 +24,62 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% block content %}
 <div class="grid_12 blanc">
 
+    {% block navbar %}
+        <ul id="breadcrumbs">
+        <li class="first bc_cat"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
+        {% for name, url in product.category.all.0.get_url_name %}
+            <li class="bc_cat"><a href="{{ url }}">{{ name }}</a></li>
+        {% endfor %}
+        <li>{{ product.translated_name }}</li>
+        </ul>
+    {% endblock %}
 
-{% block navbar %}
-    <ul id="navbar">
-    <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
-    {% for name, url in product.category.all.0.get_url_name %}
-        <li><a href="{{ url }}">{{ name }}</a></li>
-    {% endfor %}
-    <li>{{ product.translated_name }}</li>
-    </ul>
-{% endblock %}
-<h3>{{ product.translated_name }}</h3>
+    <h3>{{ product.translated_name }}</h3>
 
 </div>
 
-<div class="grid_5 blanc">    
-    {% for pic in product.productimage_set.all %}
-        {% thumbnail pic.picture 380x380 as image %}
-        <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
-    {% endfor %}
-    
-</div>
+<div id="fiche_produit" class="container_12">
 
-<div class="grid_7 blanc">
-    <p>{{ product.description|safe }}</p>
+    <div class="grid_5 blanc">    
+        {% for pic in product.productimage_set.all %}
+            {% thumbnail pic.picture 380x380 as image %}
+            <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
+        {% endfor %}
+        
+    </div>
 
-<br/>
-    <table class="attributes" cellspacing="0" cellpadding="0" border="1">
-    {% with product.translated_attributes as atts %}
-        {% if atts %}
-            {% for att in product.translated_attributes %}
-            <tr><th>{{ att.description }}</th><td>{{ att.value }}</td></tr>
+    <div class="grid_7 blanc">
+        <p>{{ product.description|safe }}</p>
+
+        <br/>
+        <table class="attributes" cellspacing="0" cellpadding="0" border="1">
+
+        {% with product.translated_attributes as atts %}
+            {% if atts %}
+                {% for att in product.translated_attributes %}
+
+                    {% if att.description == 'URL' %}
+                    <tr><th><a href="{{ att.value }}" target="_blank">Fiche complète</a></th><td></td></tr>
+                    {% else %}
+                    <tr><th>{{ att.description }}</th><td>{{ att.value }}</td></tr>
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if product.unit_price > 0 %}
+            <tr><th>Prix</th><td>{{ product|sale_price|currency }}</td></tr>
+        {% endif %}
+
+        {% if product.fournisseur_set.all %}
+            {% for m in product.fournisseur_set.all %}
+            <tr><th>Fabricant</th><td>{{ m.name }}</td></tr>
             {% endfor %}
         {% endif %}
-    {% endwith %}
-    {% if product.matiere_set.all %}
-        {% for m in product.matiere_set.all %}
-        <tr><th>Matière</th><td>{{ m.name }}</td></tr>
-        {% endfor %}
-    {% endif %}
-    {% if product.fabricant_set.all %}
-        {% for m in product.fabricant_set.all %}
-        <tr><th>Fabricant</th><td>{{ m.name }}</td></tr>
-        {% endfor %}
-    {% endif %}
-    
-    </table>
+        
+        </table>
+    </div>
 </div>
 
 <div class="grid_12 blanc">

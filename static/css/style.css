@@ -1,6 +1,7 @@
 /* @override 
-	http://www.tendance-garden.fr/static/css/style.css
+
 	http://localhost:8000/static/css/style.css
+	http://www.cheze.fr/static/css/style.css
 */
 
 body {
@@ -29,6 +30,7 @@ h3{
 	font-size: 18px;
 	color: #5e5e5e;
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
 
@@ -399,9 +401,11 @@ http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
 	#top: 50%;
 }
 
-.product_wrapper > a > img{
+#product_category img {
+	position: relative;
 	width: 85px;
 }
+
 
 .product_listing.bl-hover {
 	box-shadow: 2px 2px 5px #555;
@@ -410,18 +414,17 @@ http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
 	background-color: white;
 }
 
-#product_category img {
-	#position: relative;
-	#top: -50%;
-}
-
 .minidesc {
 	position: absolute;
 	left: 110px;
-	font-size: 12px;
-	line-height: 16px;
 	width: 180px;
 	#top: -50%;
+	font: 12px/16px "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+.minidesc > a{
+	text-decoration: none;
+	font-weight: bold;
 }
 
 .listed_in {
@@ -467,18 +470,20 @@ div.sous-cat h4 {
 	z-index: 1000;
 }
 
-.sous-cat a {
-	position: relative;
-	right: 65px;
-}
 
 /* @end */
 
 /* @group Produit */
 
+#fiche_produit{
+	display: inline-block;
+	margin-top: 20px;
+}
+
 table.attributes {
 	border-collapse: collapse;
 	font-size: 14px;
+	float: right;
 }
 
 .attributes tr {
