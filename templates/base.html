@@ -1,4 +1,4 @@
-{% load static i18n active satchmo_category satchmo_google satchmo_util app_plugins normalize_decimal %}{% block doctype %}<?xml version="1.0" encoding="UTF-8"?>
+{% load static i18n active categories satchmo_category satchmo_google satchmo_util app_plugins normalize_decimal %}{% block doctype %}<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 {% endblock %}
@@ -13,7 +13,8 @@
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easyListSplitter.js"></script>
+
     {% block extra-head %}{% endblock %}
 
     {% plugin_point "page_head" %}
@@ -27,25 +28,35 @@
     <div id="entete_liserai_gris">
         <div id="entete_liserai_jaune">
             <div id="entete" class="container_12">
-                <img src="{{ STATIC_URL }}images/logo-cheze.png" alt="CHEZE SAS" id="logo"/>
+                <a href="/" title="accueil">
+                    <img src="{{ STATIC_URL }}images/logo-cheze.png" alt="CHEZE SAS" id="logo" border="0" /></a>
+{% comment %}
+                {% categories deep=3 select_parents=1 ul_class=nav %}
+{% endcomment %}
 
                 <ul class="nav">
-                    <li class="{% active request "/" %}"><a href="/">Accueil</a></li>
+                    <li class="index{% active request "/" %}"><a href="/">Accueil</a></li>
+                    
                     {% for c in categories %}
-                    {% if not c.parents %}
-                    <li class="cat {% active request c.get_absolute_url %}"><a href="{{c.get_absolute_url}}">{{c.name}}</a>
-                        {% if c.get_active_children %}
-                        <!--ul class="subcats">
-                            {% for sc in c.get_active_children %}
-                            <li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a></li>
-                            {% endfor %}
-                        </ul-->
-                        {% endif %}
-                    </li>
-                    {% endif%}
-                    {% endfor %}
-                    <li class="{% active request "/contact/" %}"><a href="/contact/">Contact</a></li>
+                    {% if not c.parents %}<li class="cat{% active request c.get_absolute_url %}">
+                        <a href="{{c.get_absolute_url}}" rel="list-{{c.slug}}">{{c.name}}</a>
+                        {% if c.get_all_children %}<div class="cat_list" id="list-{{c.slug}}">
+                            <ul class="subcats level2">
+                            {% for sc in c.get_all_children %}
+                            {% if sc.parent_id == c.id %}<li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a>
+
+                                {% if sc.get_all_children %}<ul class="subcats level3">
+                                    {% for ssc in sc.get_all_children %}{% if ssc.parent_id == sc.id %}
+                                        <li><a href="{{ssc.get_absolute_url}}">{{ssc.name}}</a></li>
+                                    {% endif %}{% endfor %}
+                                    </ul>{% endif %}
+                            </li>{% endif %}{% endfor %}
+                            </ul>
+                        </div>{% endif %}</li>
+                    {% endif%}{% endfor %}
+                    <li class="contact{% active request "/contact/" %}"><a href="/contact/">Contact</a></li>
                 </ul>
+
 
             </div>
         </div>
@@ -83,7 +94,7 @@
                             03450 Ebreuil<br/><br/>
                             <span class="tel">Tel : 04 70 90 72 11</span><br/>
                             <span class="fax">Fax : 04 70 90 75 32</span><br/>
-                            <a class="email" href="@maito:cheze.jm@cheze-sas.com">cheze.jm@cheze-sas.com</a>
+                            <a class="email" href="/contact/">contact e-mail</a>
                         </address>
                     </div>
                 </div>
@@ -138,5 +149,29 @@
 {% endif %}
 {% endblock %}
 {% endblock %}
+
+<script type="text/javascript">
+$(function(){
+
+    $(".cat_list > ul").easyListSplitter({colNumber:3});
+
+    $("li.cat a").click(function(event){
+        list = $(".cat_list#"+$(this).attr('rel'));
+        if(list.is(':hidden')){
+            total = list.height() + 140
+            list.show();
+            $("#entete").animate({height:total},1000);
+        }else if(list.is(':visible')){
+            $("#entete").animate({height:120},1000, function(){
+                list.hide();
+            });
+        };    
+        event.preventDefault();
+
+    });
+
+});
+</script>
+
 
 </body></html>

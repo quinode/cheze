@@ -20,11 +20,11 @@ h1,h2,h3,h4,h5{
 }
 
 #entete{
-	height: 120px;
 	background-color: black;
 	background-image: url(/static/images/rayures.png);
 	position: relative;
 	text-align: left;
+	height: 120px;
 }
 
 #entete_liserai_gris{
@@ -54,18 +54,19 @@ h1,h2,h3,h4,h5{
 ul.nav{
 	position: absolute;
 	bottom: 0;
+	width: 100%;
+	top: 90px;
+	height: 27px;
 }
 
 ul.nav > li{
 	float: left;
-	position: relative;
 }
 
 ul.nav > li > a{
 	display: inline-block;
 	color: white;
 	text-decoration: none;
-	padding: 0.3em 1em 0.2em;
 	font-family: Arial, Verdana, sans-serif;
 	-webkit-border-top-left-radius: 7px;
 	-webkit-border-top-right-radius: 7px;
@@ -76,14 +77,26 @@ ul.nav > li > a{
 	font-weight: bold;
 	margin-right: 0.9em;
 	margin-left: 0.9em;
+	padding: 7px 1em;
 }
 
-ul.nav > li > a:hover, ul.nav > li:hover > a, ul.subcats > li > a:hover {
+ul.nav > li > a:hover, 
+ul.nav > li:hover > a, 
+ul.subcats > li > a:hover {
 	color: #f5e95d;
 	background-color: black;
 	background-color: rgba(0,0,0,0.75);
-	
+	 box-shadow:0px 0px 9px #ccc;
+    -webkit-box-shadow:0px 0px 9px #ccc;
+    -moz-box-shadow:0px 0px 9px #ccc;
 }
+
+
+ul.subcats li a{
+	color: white;
+	text-decoration: none;
+}
+
 
 ul.nav > li.active > a{
 	background-color: white;
@@ -92,6 +105,69 @@ ul.nav > li.active > a{
 	
 }
 
+.cat_list{
+	display: none;
+	left: 0;
+	top: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
+	width: 900px;
+	position: absolute;
+	border-top: 4px solid #c4c3c4;
+	background-color: rgba(74,74,74,0.79);
+	padding-bottom: 20px;
+}
+
+ul.subcats.level2{
+	list-style-type: none;
+	display: inline;
+	float: left;
+}
+
+ul.subcats.level2 li{
+	margin-top: 20px;
+	position: relative;
+}
+
+ul.subcats.level2 > li > a{
+	font-size: 16px;
+	display: inline-block;
+	font-variant: small-caps;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	//border-bottom: 1px solid #eee;
+	padding: 4px 9px 5px;
+}
+
+ul.subcats.level3 > li{
+	margin: 0;
+}
+
+ul.subcats.level3 > li > a{
+	padding: 3px 7px 4px;
+	display: inline-block;
+	margin: 0;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+
+ul.subcats.level3{
+	border-top: 1px solid #838383;
+
+	list-style-type: none;
+	padding-left: 10px;
+	color: white;
+	font-size: 13px;
+	list-style-position: outside;
+	margin-right: 30px;
+	padding-top: 5px;
+}
+
+
+/*
 ul.subcats {
 	background-color: black;
 	background-color: rgba(0,0,0,0.85);
@@ -138,11 +214,12 @@ ul.subcats > li:first-child > a:hover {
 	-moz-border-radius-topright: 7px;
 	border-top-right-radius: 7px;
 }
+*/
+
 
 #page {
 	background-color: #fff;
 	display: inline-block;
-	background-image: url(/static/images/signe_bas.png);
 	background-repeat: no-repeat;
 	background-position: right top;
 	position: relative;
@@ -292,6 +369,11 @@ ul.subcats > li:first-child > a:hover {
 /* @end */
 
 /* @group Liste Produits */
+
+.all_cats ul{
+	margin-left: 20px;
+}
+
 
 #product_category{
 	display: inline-block;

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
 from localsite.models import Fournisseur
-from product.admin import CategoryOptions, ProductOptions, ProductAttribute_Inline, ProductImage_Inline
+from product.admin import CategoryOptions, ProductOptions, ProductAttribute_Inline, ProductImage_Inline, Price_Inline
 
 
 from django.contrib.admin.widgets import FilteredSelectMultiple
@@ -74,7 +74,11 @@ class ProductAdmin(ProductOptions):
     list_display = ('main_category', 'name', 'active', 'featured',)
     list_display_links = ('name',)
     list_filter = ('category', 'date_added', 'active', 'featured')
-    inlines = [FournisseurInline, ProductAttribute_Inline, ProductImage_Inline]
+    inlines = [FournisseurInline, 
+               ProductAttribute_Inline, 
+               Price_Inline,
+               ProductImage_Inline,
+               ]
     fieldsets = (
             (None, {'fields': ('site', 'category', 'name', 'description', 
                     'short_description', 'active', 'featured', 'ordering')}), 

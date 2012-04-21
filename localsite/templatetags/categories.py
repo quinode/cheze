@@ -21,33 +21,38 @@ def recurse_for_children(current_node, parent_node, active_categories = [], show
             attrs["class"] = "current" 
         link = SubElement(temp_parent, 'a', attrs)
         link.text = current_node.translated_name()
-        if current_deep == deep: return
-        if not child_count: return
+        if current_deep == deep: 
+            return
+        if not child_count: 
+            return
         new_parent = SubElement(temp_parent, 'ul')
         children = current_node.child.all()
         for child in children:
             recurse_for_children(child, new_parent, active_categories, show_empty, deep, current_deep + 1)
 
 class SubcategoryTree(Node):
-    def __init__(self, active = None, from_level = 0, deep = -1, select_parents = 0):
+    def __init__(self, active = None, from_level = 0, deep = -1, select_parents = 0, ul_class = "categories"):
         self.active = active
         self.from_level = int(from_level)
         self.deep = int(deep)
         self.select_parents = bool(select_parents)
+        self.ul_class = str(ul_class)
 
     def render(self, context):
-        root = Element("ul")
+        root = Element("ul", {'class': self.ul_class})
         active_categories = []
         root_categories = None
         if self.active:
             active_cat = Variable(self.active).resolve(context)
             active_categories = [active_cat]
-            if self.select_parents: active_categories.extend(active_cat.parents())
+            if self.select_parents: 
+                active_categories.extend(active_cat.parents())
             if self.from_level:
                 parents = active_cat.parents()
                 parents.append(active_cat)
                 index = self.from_level - 1
-                if index > len(parents): return ("")
+                if index > len(parents): 
+                    return ("")
                 root_categories = parents[index].child.all()
             else:
                 root_categories = Category.objects.root_categories()

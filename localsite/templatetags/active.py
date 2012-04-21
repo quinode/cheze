@@ -6,10 +6,9 @@ register = template.Library()
 def active(request, pattern):
 
     if pattern == '/' and request.path == '/':
-        return 'active'
+        return ' active'
     elif pattern == '/':
         return ''
     elif request.path.startswith(pattern):
-        return 'active'
+        return ' active'
     return ''
-    
