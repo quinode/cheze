@@ -15,11 +15,24 @@ body {
 	background-image: url(/static/images/ombre_content.png);
 }
 
-h1,h2,h3,h4,h5{
+h1,h2,h3,h4,h5 {
 	font-family: "Arial Black", Verdana, sans-serif;
 }
 
-#entete{
+h2{
+	font-size: 36px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+h3{
+	font-size: 18px;
+	color: #5e5e5e;
+	margin-bottom: 10px;
+}
+
+
+#entete {
 	background-color: black;
 	background-image: url(/static/images/rayures.png);
 	position: relative;
@@ -27,17 +40,17 @@ h1,h2,h3,h4,h5{
 	height: 120px;
 }
 
-#entete_liserai_gris{
+#entete_liserai_gris {
 	border-top: 8px solid #999ca0;
 	border-bottom: 8px solid #999ca0;
 }
 
-#entete_liserai_jaune{
+#entete_liserai_jaune {
 	border-top: 2px solid #f6f71f;
 	border-bottom: 2px solid #f6f71f;
 }
 
-#entete h1{
+#entete h1 {
 	color: white;
 	font: 52px Futura Md BT;
 	position: relative;
@@ -45,13 +58,13 @@ h1,h2,h3,h4,h5{
 	left: 20px;
 }
 
-#entete #logo{
+#entete #logo {
 	width: 330px;
 	margin-top: 20px;
 	margin-left: 20px;
 }
 
-ul.nav{
+ul.nav {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -59,11 +72,11 @@ ul.nav{
 	height: 27px;
 }
 
-ul.nav > li{
+ul.nav > li {
 	float: left;
 }
 
-ul.nav > li > a{
+ul.nav > li > a {
 	display: inline-block;
 	color: white;
 	text-decoration: none;
@@ -86,53 +99,48 @@ ul.subcats > li > a:hover {
 	color: #f5e95d;
 	background-color: black;
 	background-color: rgba(0,0,0,0.75);
-	 box-shadow:0px 0px 9px #ccc;
-    -webkit-box-shadow:0px 0px 9px #ccc;
-    -moz-box-shadow:0px 0px 9px #ccc;
+	box-shadow: 0px 0px 9px #ccc;
+	-webkit-box-shadow: 0px 0px 9px #ccc;
+	-moz-box-shadow: 0px 0px 9px #ccc;
 }
 
-
-ul.subcats li a{
+ul.subcats li a {
 	color: white;
 	text-decoration: none;
 }
 
-
-ul.nav > li.active > a{
+ul.nav > li.active > a {
 	background-color: white;
 	background-color: rgba(255,255,255,0.75);
 	color: #000;
-	
 }
 
-.cat_list{
+.cat_list {
 	display: none;
 	left: 0;
 	top: 30px;
-	padding-right: 25px;
-	width: 910px;
+	padding-right: 20px;
+	width: 920px;
 	position: absolute;
 	border-top: 4px solid #c4c3c4;
 	background-color: rgba(74,74,74,0.79);
 	padding-bottom: 20px;
-	padding-left: 25px;
+	padding-left: 20px;
 }
 
-ul.subcats.level2{
+ul.subcats.level2 {
 	list-style-type: none;
 	display: inline;
 	float: left;
-	max-width: 200px;
-	margin-right: 25px;
-
+	max-width: 220px;
 }
 
-ul.subcats.level2 > li{
+ul.subcats.level2 > li {
 	margin-top: 20px;
 	position: relative;
 }
 
-ul.subcats.level2 > li > a{
+ul.subcats.level2 > li > a {
 	font-size: 16px;
 	display: inline-block;
 	font-variant: small-caps;
@@ -143,26 +151,9 @@ ul.subcats.level2 > li > a{
 	padding: 4px 9px 5px;
 }
 
-ul.subcats.level3 > li{
-	margin: 0;
-	border-bottom: 1px solid #5e5e5e;
-	font: 11px "Lucida Grande", Lucida, Verdana, sans-serif;
-}
-
-ul.subcats.level3 > li > a{
-	padding: 3px 7px 4px;
-	display: block;
-	margin: 0;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-
-}
-
-
-ul.subcats.level3{
+ul.subcats.level3 {
 	border-top: 2px ridge #d5d5d5;
-
+	margin-right: 25px;
 	list-style-type: none;
 	padding-left: 4px;
 	color: white;
@@ -171,6 +162,20 @@ ul.subcats.level3{
 	padding-top: 2px;
 }
 
+ul.subcats.level3 > li {
+	margin: 0;
+	border-bottom: 1px solid #5e5e5e;
+	font: 11px "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+ul.subcats.level3 > li > a {
+	padding: 3px 7px 4px;
+	display: block;
+	margin: 0;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
 
 #page {
 	background-color: #fff;
@@ -178,7 +183,34 @@ ul.subcats.level3{
 	background-repeat: no-repeat;
 	background-position: right top;
 	position: relative;
+	width: 960px;
 }
+
+#breadcrumbs {
+	border-bottom: 1px solid #ccc;
+	line-height: 20px;
+	overflow: auto;
+	font-size: 11px;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 2px;
+}
+
+#breadcrumbs li {
+	float: left;
+	padding-right: 5px;
+}
+#breadcrumbs li.bc_cat a{
+	padding-right: 5px;
+	color: #00548d;
+}
+
+#breadcrumbs li.bc_cat a:visited{
+	color: #85a8cf;
+}
+
+#breadcrumbs li.bc_cat:after { content: ' » '; }
+
 
 /* @group accueil */
 
@@ -265,8 +297,8 @@ ul.subcats.level3{
 	margin-top: -48px;
 	z-index: 10;
 }
-/* @end */
 
+/* @end */
 
 /* @group footer */
 
@@ -282,12 +314,12 @@ ul.subcats.level3{
 	position: relative;
 }
 
-#footer a{	
+#footer a {
 	font-weight: normal;
 	font-style: normal;
 }
 
-#footer a:hover, #footer a:focus{
+#footer a:hover, #footer a:focus {
 	text-decoration: none;
 	color: #bc0c26;
 }
@@ -297,15 +329,13 @@ ul.subcats.level3{
 	text-decoration: none;
 }
 
-#footer .picture, #footer .coord
-{
+#footer .picture, #footer .coord {
 	float: left;
 	padding: 0 10px;
 }
 
-#footer .coord
-{
-	border-left: 2px solid #e9db47;	
+#footer .coord {
+	border-left: 2px solid #e9db47;
 }
 
 #footer address strong {
@@ -315,7 +345,7 @@ ul.subcats.level3{
 	line-height: 1.2em;
 }
 
-#w3c{
+#w3c {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
@@ -325,23 +355,25 @@ ul.subcats.level3{
 
 /* @group Liste Produits */
 
-.all_cats ul{
+.all_cats ul {
 	margin-left: 20px;
 }
 
-
-#product_category{
+#product_category {
 	display: inline-block;
 	position: relative;
 }
 
-#product_category li{
+#product_category li {
 	display: block;
 	margin-bottom: 17px;
 	position: relative;
+	margin-left: 6px;
+	margin-right: 6px;
 }
 
-.product_listing:hover{
+.product_listing:hover {
+	
 }
 
 /*
@@ -349,39 +381,41 @@ Thanks
 http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
 */
 
-
-.product_listing{
+.product_listing {
 	border: 1px solid #a9a9a9;
 	position: relative;
 	overflow: hidden;
-		
 	display: table;
 	height: 107px;
 	width: 100%;
 }
 
-.product_wrapper{
+.product_wrapper {
 	position: relative;
 	padding: 10px;
 	vertical-align: middle;
 	display: table-cell;
 	#position: absolute;
-	#top:50%;
+	#top: 50%;
 }
 
-.product_listing.bl-hover{
-    box-shadow:2px 2px 5px #555;
-    -webkit-box-shadow:2px 2px 5px #555;
-    -moz-box-shadow:2px 2px 5px #555;
+.product_wrapper > a > img{
+	width: 85px;
+}
+
+.product_listing.bl-hover {
+	box-shadow: 2px 2px 5px #555;
+	-webkit-box-shadow: 2px 2px 5px #555;
+	-moz-box-shadow: 2px 2px 5px #555;
 	background-color: white;
 }
 
-#product_category img{
+#product_category img {
 	#position: relative;
 	#top: -50%;
 }
 
-.minidesc{
+.minidesc {
 	position: absolute;
 	left: 110px;
 	font-size: 12px;
@@ -390,56 +424,37 @@ http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
 	#top: -50%;
 }
 
-
-.listed_in{
+.listed_in {
 	color: #a9a9a9;
 	font-style: italic;
 	font-weight: bold;
 }
 
-
 /* @end */
 
 /* @group Catégorie */
 
-
-
 .product_category_header {
-	margin-bottom: 20px;
 	display: inline-block;
 }
 
-.product_category_description{
+.product_category_description {
 	display: block;
 	margin-bottom: 20px;
 	font-style: italic;
 	color: #515151;
 }
 
-div.sous-cat{
+div.sous-cat {
 	position: relative;
-	margin-left: 7px;
-	overflow: hidden;
-	margin-bottom: 25px;
-	margin-right: 7px;
-	min-height: 110px;
 }
 
-div.sous-cat:first-child,
-div.sous-cat:nth-child(5),
-div.sous-cat:nth-child(9){
-	margin-left: 18px;
-}
-
-
-
-div.sous-cat.bl-hover h4{
+div.sous-cat.bl-hover h4 {
 	color: #bc0c26;
 	background-color: rgba(234,234,234,0.7);
 }
 
-
-div.sous-cat h4{
+div.sous-cat h4 {
 	position: absolute;
 	background-color: #bc0c26;
 	color: #fffeff;
@@ -452,7 +467,7 @@ div.sous-cat h4{
 	z-index: 1000;
 }
 
-.sous-cat a{
+.sous-cat a {
 	position: relative;
 	right: 65px;
 }
@@ -461,67 +476,60 @@ div.sous-cat h4{
 
 /* @group Produit */
 
-table.attributes{
+table.attributes {
 	border-collapse: collapse;
 	font-size: 14px;
 }
 
-.attributes tr{
-	border-bottom : 1px solid #5e5e5e;
+.attributes tr {
+	border-bottom: 1px solid #5e5e5e;
 }
 
-
 .attributes th,
-.attributes td{
+.attributes td {
 	padding: 10px;
 }
 
-.attributes th{
+.attributes th {
 	text-align: left;
 	padding-right: 30px;
 	font-weight: bold;
 	padding-left: 10px;
 }
 
-.attributes td{
+.attributes td {
 	padding-right: 10px;
 }
 
-.attributes tr:last-child{
+.attributes tr:last-child {
 	border-bottom-style: none;
 }
 
 /* @end */
 
-
-
 /* @group filterpatch */
 
 .selector {
-    width: 900px;
+	width: 900px;
 }
 
 .selector-available, .selector-chosen {
-    width: 420px;
+	width: 420px;
 	border: 1px solid #ccc;
 }
 
 .selector ul.selector-chooser {
 	margin: 8em 10px 0;
-
 }
 
 .selector select {
-    margin-bottom: 5px;
-    margin-top: 0;
+	margin-bottom: 5px;
+	margin-top: 0;
 	width: 420px;
 }
 
 a.selector-chooseall, a.selector-clearall {
-    width: 12em;
+	width: 12em;
 }
 
 /* @end */
-
-
-

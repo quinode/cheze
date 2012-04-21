@@ -19,13 +19,14 @@ class GitemSpider(BaseSpider):
     skip_cats = ['a-poser', 'encastrable', 'informatique']
 
     rules = (
-        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', restrict_xpaths='//div[@id="menu"]'),
+        
+        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', restrict_xpaths='//div[@id="menu"]'),
             'change_page', follow=True,
         ),
-        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', restrict_xpaths='//div[@class="accueil-categ"]'),
+        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', restrict_xpaths='//div[@class="accueil-categ"]'),
             'change_page', follow=True,
         ),
-        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', restrict_xpaths='//ul[@class="products-grid"]'),
+        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', restrict_xpaths='//ul[@class="products-grid"]'),
             'parse_product', follow=True,
         ),
     )

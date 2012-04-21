@@ -10,7 +10,7 @@ class NoRootURL(object):
         if item['product_url'].count('/') > 3:
             return item
         else:
-            raise DropItem()
+            raise DropItem(u'A root (fashionable) URL')
 
 
 class CleanPipeline(object):

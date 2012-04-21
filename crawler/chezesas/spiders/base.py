@@ -86,7 +86,8 @@ class BaseSpider(CrawlSpider):
                                               # et notre catégorie parent de base sera créée à la fin
                 current_parent, created = Category.objects.get_or_create(slug=parent_cat['slug'], 
                                                                 parent=current_parent, 
-                                                                defaults={'site': Site.objects.get_current(), 'name': parent_cat['name']})
+                                                                defaults={'site': Site.objects.get_current(), 'name': parent_cat['name'],
+                                                                'meta':'', 'description':' '})
             cat, created = Category.objects.get_or_create(slug=slug, parent=current_parent, defaults={'site': Site.objects.get_current(), 'name': name})
             return cat
             # return None
