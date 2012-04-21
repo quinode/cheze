@@ -27,7 +27,7 @@ def name_slug_from_nth(categories, pos):
 class BaseSpider(CrawlSpider):
 
     breadcrumb_current_item_is_a_link = False
-    root_category_slug = u'Accueil'   # ce n'est qu'un exemple
+    root_category_slug = u'accueil'   # ce n'est qu'un exemple
     skip_cats = []
 
     def extract(self, elt, index=0):
@@ -87,7 +87,7 @@ class BaseSpider(CrawlSpider):
                 current_parent, created = Category.objects.get_or_create(slug=parent_cat['slug'], 
                                                                 parent=current_parent, 
                                                                 defaults={'site': Site.objects.get_current(), 'name': parent_cat['name'],
-                                                                'meta':'', 'description':' '})
+                                                                'meta': '', 'description': ' '})
             cat, created = Category.objects.get_or_create(slug=slug, parent=current_parent, defaults={'site': Site.objects.get_current(), 'name': name})
             return cat
             # return None
@@ -96,7 +96,6 @@ class BaseSpider(CrawlSpider):
             #     return None
         else:
             return None
-
 
     def get_price(self, price):
         if price is None:

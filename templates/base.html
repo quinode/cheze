@@ -151,24 +151,43 @@
 {% endblock %}
 
 <script type="text/javascript">
+
+
+var slideOpen = function(list){
+    slide_height = list.height() + 140
+    list.show();
+    $("#entete").animate({height:slide_height},1000); 
+}
+
+var slideClose = function(list){
+    $("#entete").animate({height:120},1000, function(){
+        list.hide();
+    });
+}    
+
 $(function(){
 
     $(".cat_list > ul").easyListSplitter({colNumber:5});
 
     $("a.cat_link").click(function(event){
-        $(".cat_list:visible").hide();
-        list = $(".cat_list#"+$(this).attr('rel'));
-        if(list.is(':hidden')){
-            total = list.height() + 140
-            list.show();
-            $("#entete").animate({height:total},1000);
-        }else if(list.is(':visible')){
-            $("#entete").animate({height:120},1000, function(){
-                list.hide();
-            });
-        };    
+        
+        open_list = $(".cat_list:visible");
+        target_list = $(".cat_list#"+$(this).attr('rel'));
+        if(target_list.attr("id") == open_list.attr("id")){
+            // clic sur le nom de la liste déjà ouverte
+            slideClose(target_list);
+        }else if(open_list.attr("id") == undefined){ 
+            // clic et aucune liste encore ouverte
+            slideOpen(target_list);
+        }else if(target_list.attr("id") != open_list.attr("id")){
+            //clic sur une autre liste que celle qui est ouverte
+            open_list.hide();
+            slideClose(open_list);
+            slideOpen(target_list);
+        }else{
+            alert('what else ?')
+        }
         event.preventDefault();
-
     });
 
 });

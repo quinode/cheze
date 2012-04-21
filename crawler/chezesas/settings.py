@@ -63,4 +63,5 @@ FIELD_SHOP = "shop"
 GITEM = 0
 TOUTAFAIRE = 1
 YVANBEAL = 2
+BRICOPRO = 3
 #####################################################################
