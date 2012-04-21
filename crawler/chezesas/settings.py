@@ -7,6 +7,7 @@ SPIDER_MODULES = ['chezesas.spiders']
 NEWSPIDER_MODULE = 'chezesas.spiders'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 ITEM_PIPELINES = [
+    'chezesas.pipelines.NoRootURL',
     'chezesas.pipelines.CleanPipeline',
     'chezesas.pipelines.DBWriterPipeline',
 ]
@@ -17,8 +18,8 @@ LOG_LEVEL = 'ERROR'
 
 ############## CONFIG AJOUTER POUR LE LIEN AVEC DJANGO ##############
 # La valeur de debug permet de limiter le nombre de pages parsées lors du crawl
-#DEBUG = False     # Valeur pour la production. Parse toute les pages pour récupérer tous les items
-DEBUG = True      # Valeur pour les tests. Récupère qu'1 ou 2 pages pour permettre les tests
+DEBUG = False     # Valeur pour la production. Parse toute les pages pour récupérer tous les items
+#DEBUG = True      # Valeur pour les tests. Récupère qu'1 ou 2 pages pour permettre les tests
 
 SITE_ID = 1
 

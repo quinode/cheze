@@ -15,8 +15,11 @@ class YvanbealSpider(BaseSpider):
     start_urls = [
         "http://www.yvanbeal.com/recherche.html?p=1&d=Beal_Catalog_Product&"
     ]
+    
+    breadcrumb_current_item_is_a_link = True
+    root_category_slug = 'catalogue'
 
-    if settings['DEBUG']:
+    if settings['DEBUG'] == True:
         rules = (
             Rule(SgmlLinkExtractor(allow='www\.yvanbeal\.com/recherche\.html\?p=[1-2]&d=Beal_Catalog_Product$'),
                 'change_page', follow=True,
@@ -35,8 +38,6 @@ class YvanbealSpider(BaseSpider):
         ),
     )
 
-    breadcrumb_current_item_is_a_link = True
-    root_category_slug = 'catalogue'
 
     def change_page(self, response):
         self.parse(response)
@@ -49,7 +50,6 @@ class YvanbealSpider(BaseSpider):
         i[settings['FIELD_MANUFACTURER']] = self.extract(hxs.select('//div[@class="product"]/div[@class="fiche"]/img[@class="log"]/@alt'))
         i[settings['FIELD_SHORT_DESCRIPTION']] = None
         i[settings['FIELD_PRICE']] = None
-        # i[settings['FIELD_CATEGORY']] = self.get_category(hxs.select('//div[@class="product"]/div[@class="fiche"]/h1/text()'), 
         i[settings['FIELD_CATEGORY']] = self.get_category(hxs.select('//div[@class="chemin"]/ul/li/a/b/text()'), 
                                                                         {'name': 'Motoculture', 'slug': 'motoculture'})
         i[settings['FIELD_PRODUCT_URL']] = response.url

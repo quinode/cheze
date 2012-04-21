@@ -2,18 +2,16 @@ from product.models import Price
 from django.contrib.sites.models import Site
 from livesettings import config_value
 from scrapy.conf import settings
+from scrapy.exceptions import DropItem
 
-# from scrapy.exceptions import DropItem
 
-# class GitemAccueil(object):
+class NoRootURL(object):
+    def process_item(self, item, spider):
+        if item['product_url'].count('/') > 3:
+            return item
+        else:
+            raise DropItem()
 
-#     def process_item(self, item, spider):
-#         if item['price']:
-#             if item['price_excludes_vat']:
-#                 item['price'] = item['price'] * self.vat_factor
-#             return item
-#         else:
-#             raise DropItem("Missing price in %s" % item)
 
 class CleanPipeline(object):
     def process_item(self, item, spider):
@@ -27,9 +25,17 @@ class CleanPipeline(object):
         item['shipclass'] = "DEFAULT"
 
         # if item[settings['FIELD_MANUFACTURER']]:
-        #     item[settings['FIELD_MANUFACTURER']] = item[settings['FIELD_MANUFACTURER']].lower().capitalize()
+        #     item[settings['FIELD_MANUFACTURER']] = item[settings['FIELD_MANUFACTURER']].upper()
+        
         if item[settings['FIELD_TITLE']]:
-            item[settings['FIELD_TITLE']] = item[settings['FIELD_TITLE']].lower().capitalize()
+            if spider.name == 'gitem':
+                item[settings['FIELD_TITLE']] = item[settings['FIELD_TITLE']].lower().capitalize() \
+                    + u' ' + item[settings['FIELD_MANUFACTURER']] + u' (' + item[settings['FIELD_REFERENCE']] + u')'
+            elif spider.name == 'yvanbeal':
+                pass
+            else:
+                item[settings['FIELD_TITLE']] = item[settings['FIELD_TITLE']].lower().capitalize()
+          
         if item[settings['FIELD_PRICE']]:
             item[settings['FIELD_PRICE']] = Price(price=item[settings['FIELD_PRICE']], quantity=1)
         if not item[settings['FIELD_DESCRIPTION']]:

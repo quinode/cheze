@@ -15,8 +15,10 @@ class ToutfaireSpider(BaseSpider):
     start_urls = [
         "http://toutfaire.fr/liste-produits"
     ]
+    breadcrumb_current_item_is_a_link = False
+    root_category_slug = 'accueil'
 
-    if settings['DEBUG']:
+    if settings['DEBUG'] == True:
         rules = (
             Rule(SgmlLinkExtractor(allow='toutfaire\.fr/liste-produits\?&page=[0-1]$'),
                 'change_page', follow=True,
@@ -35,8 +37,6 @@ class ToutfaireSpider(BaseSpider):
         ),
     )
 
-    breadcrumb_current_item_is_a_link = True
-
     def change_page(self, response):
         self.parse(response)
 
@@ -47,9 +47,12 @@ class ToutfaireSpider(BaseSpider):
         i[settings["FIELD_DESCRIPTION"]] = self.extract(hxs.select('//div[@id="block-product"]/div[@class="content"]/div[@class="desc"]/div[@class="first"]/p/text()'))
         i[settings['FIELD_SHORT_DESCRIPTION']] = None
         i[settings["FIELD_PRICE"]] = self.get_price(hxs.select('//div[@id="block-product"]/div[@class="content"]/div[@class="desc"]/div[@class="last"]/div[@class="price"]/strong'))
-        i[settings["FIELD_CATEGORY"]] = self.get_category(hxs.select('//div[@id="banner"]/h1/text()'), {'name': 'Matériaux', 'slug': 'materiaux'})
+        i[settings["FIELD_CATEGORY"]] = self.get_category(hxs.select('//div[@id="breadcrumb"]/ul/li/a/text()'), 
+                                                                        {'name': 'Matériaux', 'slug': 'materiaux'})
         i[settings['FIELD_PRODUCT_URL']] = response.url
         i[settings["FIELD_IMAGE_URL"]] = self.extract(hxs.select('//div[@id="block-product"]/div[@class="picture"]/div[@class="thumbs-images"]/div[@id="thumb_01"]/a/img/@src'))
+        #i[settings['FIELD_PRICE']] = self.get_price(self.extract(hxs.select('//div[@class="price"]/strong/big/text()')))
+
         return i
 
     def get_price(self, elt):
