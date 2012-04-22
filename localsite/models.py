@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 
 class Fournisseur(models.Model):
     product = models.ManyToManyField(Product, blank=True, null=True)
-    name = models.CharField("Nom", max_length=30)
+    name = models.CharField("Nom", max_length=200)
     slug = models.SlugField("Slug", blank=True, unique=True)
     description = models.TextField("Description", blank=True)
     picture = ImageWithThumbnailField('Logo', blank=True, null=True,
