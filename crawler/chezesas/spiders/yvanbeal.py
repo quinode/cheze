@@ -54,6 +54,7 @@ class YvanbealSpider(BaseSpider):
                                                                         {'name': 'Motoculture', 'slug': 'motoculture'})
         i[settings['FIELD_PRODUCT_URL']] = response.url
         i[settings["FIELD_IMAGE_URL"]] = self.extract(hxs.select('//div[@id="gallery"]/div[@class="affiche"]/a/img/@src'))
+        i[settings['FIELD_REFERENCE']] = None
         return i
 
     def get_price(self, elt):

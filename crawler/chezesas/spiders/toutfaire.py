@@ -51,7 +51,8 @@ class ToutfaireSpider(BaseSpider):
                                                                         {'name': 'Matériaux', 'slug': 'materiaux'})
         i[settings['FIELD_PRODUCT_URL']] = response.url
         i[settings["FIELD_IMAGE_URL"]] = self.extract(hxs.select('//div[@id="block-product"]/div[@class="picture"]/div[@class="thumbs-images"]/div[@id="thumb_01"]/a/img/@src'))
-        #i[settings['FIELD_PRICE']] = self.get_price(self.extract(hxs.select('//div[@class="price"]/strong/big/text()')))
+        i[settings['FIELD_REFERENCE']] = None
+        i[settings['FIELD_MANUFACTURER']] = None
 
         return i
 
