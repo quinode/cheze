@@ -92,18 +92,19 @@ class BaseSpider(CrawlSpider):
                     current_parent, created = Category.objects.get_or_create(
                                                 slug=parent_cat['slug'], 
                                                 parent=current_parent, 
-                                                defaults={'site': Site.objects.get_current(), 
-                                                            'name': parent_cat['name'],
-                                                            'meta': '', 'description': ' '}
+                                                site=Site.objects.get_current(),
+                                                defaults={'name': parent_cat['name'],
+                                                          'meta': '', 'description': ' '}
                                                 )
             if slug != root_cat['slug']:          
                 log.msg(u"GET_OR_CREATE Parent Category : %s" % name, level=log.DEBUG)
-                cat, created = Category.objects.get_or_create(slug=slug, parent=current_parent, 
-                                        defaults={'site': Site.objects.get_current(), 'name': name})
+                cat, created = Category.objects.get_or_create(
+                                    slug=slug, parent=current_parent, 
+                                    site=Site.objects.get_current(), 
+                                    defaults={'name': name, 'meta': '', 'description': ' '})
             else:
                 cat = root_parent
             return cat
-            # return None
             # except Exception, e:
             #     raise e
             #     return None
