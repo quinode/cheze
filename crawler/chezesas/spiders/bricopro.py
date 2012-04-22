@@ -13,10 +13,10 @@ class GitemSpider(BaseSpider):
     name = "bricopro"
     allowed_domains = ["bricopro.fr"]
     start_urls = [
-        "http://www.bricopro.fr/nos-produits/catalogue/62/liste.html",
-        "http://www.bricopro.fr/nos-produits/catalogue/64/liste.html",
-        "http://www.bricopro.fr/nos-produits/catalogue/83/liste.html",
-        "http://www.bricopro.fr/nos-produits/catalogue/84/liste.html",
+        # "http://www.bricopro.fr/nos-produits/catalogue/62/liste.html",
+        # "http://www.bricopro.fr/nos-produits/catalogue/64/liste.html",
+        # "http://www.bricopro.fr/nos-produits/catalogue/83/liste.html",
+         "http://www.bricopro.fr/nos-produits/catalogue/84/liste.html",
     ]
     breadcrumb_current_item_is_a_link = False
     root_category_slug = 'nos-produits'

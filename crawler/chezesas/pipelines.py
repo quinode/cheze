@@ -34,7 +34,7 @@ class CleanPipeline(object):
         if item[settings['FIELD_REFERENCE']]:
             if spider.name == "bricopro":
                 ref = u' '.join([x.strip() for x in item[settings['FIELD_REFERENCE']].splitlines()])
-                item[settings['FIELD_REFERENCE']] = ref.replace(u'Réf.', u'')
+                item[settings['FIELD_REFERENCE']] = ref.replace(u'Réf. ', u'')
             else:
                 item[settings['FIELD_REFERENCE']] = item[settings['FIELD_REFERENCE']].strip()
 
