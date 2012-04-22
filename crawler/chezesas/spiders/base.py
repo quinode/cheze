@@ -87,7 +87,7 @@ class BaseSpider(CrawlSpider):
             parent_cats = list(parents[1:-1])  # on recrée pas notre cat. racine, et la cat. parent de l'item sera créée à la fin
             if len(parent_cats) > 0:
                 for parent_cat in parent_cats:   
-                    # loop sur les cat. parentes depuis la plus générale vers la plus précise
+                    # loop sur les cat. parentes intermediaires depuis la plus générale vers la plus précise
                     log.msg(u"GET_OR_CREATE Grand-Parent Category : %s" % parent_cat, level=log.DEBUG)
                     current_parent, created = Category.objects.get_or_create(
                                                 slug=parent_cat['slug'], 
@@ -96,11 +96,13 @@ class BaseSpider(CrawlSpider):
                                                             'name': parent_cat['name'],
                                                             'meta': '', 'description': ' '}
                                                 )
-            if current_parent != root_parent:          
-                log.msg(u"GET_OR_CREATE Parent Category : %s" % current_parent, level=log.DEBUG)
+            if slug != root_cat['slug']:          
+                log.msg(u"GET_OR_CREATE Parent Category : %s" % name, level=log.DEBUG)
                 cat, created = Category.objects.get_or_create(slug=slug, parent=current_parent, 
                                         defaults={'site': Site.objects.get_current(), 'name': name})
-            return current_parent
+            else:
+                cat = root_parent
+            return cat
             # return None
             # except Exception, e:
             #     raise e

@@ -43,8 +43,11 @@
                         {% if c.get_all_children %}<div class="cat_list" id="list-{{c.slug}}">
                             <ul class="subcats level2">
                             {% for sc in c.get_all_children %}
-                            {% if sc.parent_id == c.id %}<li><a href="{{sc.get_absolute_url}}">{{sc.name}}</a>
-
+                            {% if sc.parent_id == c.id %}<li>
+                            {% if sc.images.all.count > 0 %}<img src="{{media_url}}{{ sc.main_image.picture }}" 
+                                width="{{ sc.main_image.picture.width }}" 
+                                height="{{ sc.main_image.picture.height }}"/>{% endif %}
+                                <a href="{{sc.get_absolute_url}}">{{sc.name}}</a>
                                 {% if sc.get_all_children %}<ul class="subcats level3">
                                     {% for ssc in sc.get_all_children %}{% if ssc.parent_id == sc.id %}
                                         <li><a href="{{ssc.get_absolute_url}}">{{ssc.name}}</a></li>

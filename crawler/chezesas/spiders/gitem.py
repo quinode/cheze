@@ -18,17 +18,22 @@ class GitemSpider(BaseSpider):
     root_category_slug = 'accueil'
     skip_cats = ['a-poser', 'encastrable', 'informatique']
 
-    rules = (
-        
-        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', restrict_xpaths='//div[@id="menu"]'),
-            'change_page', follow=True,
+    rules = ( 
+        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/[0-9a-z-]+\.html$', deny='product_compare', 
+                               restrict_xpaths='//div[@id="menu"]'),
+                'change_page', follow=True,
         ),
-        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', restrict_xpaths='//div[@class="accueil-categ"]'),
-            'change_page', follow=True,
+        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', 
+                               restrict_xpaths=['//div[@class="blockCategorie"]',
+                                                '//ul[@class="products-grid"]',
+                                                '//div[@class="breadcrumbs"]',
+                                                ]),
+                'parse_product', follow=True,
         ),
-        Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', restrict_xpaths='//ul[@class="products-grid"]'),
-            'parse_product', follow=True,
-        ),
+        # Rule(SgmlLinkExtractor(allow='www\.gitem\.fr/.+$', deny='product_compare', 
+        #                        restrict_xpaths='//ul[@class="products-grid"]'),
+        #     'parse_product', follow=True,
+        # ),
     )
 
     def change_page(self, response):
