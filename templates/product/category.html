@@ -66,7 +66,7 @@
                         </span><br/>
                     {% endif %}
                     {% for attr in product.productattribute_set.all %}
-                    {% if attr.name == 'matiere' or attr.name == 'dimensions' %}
+                    {% if attr.name == 'manufacturer' or attr.name == 'reference' %}
                     {{ attr.value }}<br/>
                     {% endif %}
                     {% endfor %}
@@ -102,7 +102,7 @@
                                         </span><br/>
                                     {% endif %}
                                     {% for attr in product.productattribute_set.all %}
-                                    {% if attr.name == 'matiere' or attr.name == 'dimensions' %}
+                                    {% if attr.name == 'reference' or attr.name == 'manufacturer' %}
                                     {{ attr.value }}<br/>
                                     {% endif %}
                                     {% endfor %}

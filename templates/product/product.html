@@ -58,7 +58,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
             {% if atts %}
                 {% for att in product.translated_attributes %}
 
-                    {% if att.description == 'URL' %}
+                    {% if att.description == 'product_url' %}
                     <tr><th><a href="{{ att.value }}" target="_blank">Fiche complète</a></th><td></td></tr>
                     {% else %}
                     <tr><th>{{ att.description }}</th><td>{{ att.value }}</td></tr>

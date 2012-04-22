@@ -79,17 +79,28 @@ class BaseSpider(CrawlSpider):
                     break    
             parents.append(root_cat)  # on termine en ajoutant NOTRE catégorie racine
             parents.reverse()
+            # import pdb; pdb.set_trace()
             log.msg(u"parents final : %s" % parents, level=log.DEBUG)
 
-            current_parent = Category.objects.get(slug=root_cat['slug'])
-            for parent_cat in parents[1:-1]:  # on ne va pas recréer notre catégorie racine , 
-                                              # et notre catégorie parent de base sera créée à la fin
-                current_parent, created = Category.objects.get_or_create(slug=parent_cat['slug'], 
-                                                                parent=current_parent, 
-                                                                defaults={'site': Site.objects.get_current(), 'name': parent_cat['name'],
-                                                                'meta': '', 'description': ' '})
-            cat, created = Category.objects.get_or_create(slug=slug, parent=current_parent, defaults={'site': Site.objects.get_current(), 'name': name})
-            return cat
+            root_parent = Category.objects.get(slug=root_cat['slug'])
+            current_parent = root_parent
+            parent_cats = list(parents[1:-1])  # on recrée pas notre cat. racine, et la cat. parent de l'item sera créée à la fin
+            if len(parent_cats) > 0:
+                for parent_cat in parent_cats:   
+                    # loop sur les cat. parentes depuis la plus générale vers la plus précise
+                    log.msg(u"GET_OR_CREATE Grand-Parent Category : %s" % parent_cat, level=log.DEBUG)
+                    current_parent, created = Category.objects.get_or_create(
+                                                slug=parent_cat['slug'], 
+                                                parent=current_parent, 
+                                                defaults={'site': Site.objects.get_current(), 
+                                                            'name': parent_cat['name'],
+                                                            'meta': '', 'description': ' '}
+                                                )
+            if current_parent != root_parent:          
+                log.msg(u"GET_OR_CREATE Parent Category : %s" % current_parent, level=log.DEBUG)
+                cat, created = Category.objects.get_or_create(slug=slug, parent=current_parent, 
+                                        defaults={'site': Site.objects.get_current(), 'name': name})
+            return current_parent
             # return None
             # except Exception, e:
             #     raise e
