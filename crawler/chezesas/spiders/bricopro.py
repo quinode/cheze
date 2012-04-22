@@ -31,7 +31,7 @@ class GitemSpider(BaseSpider):
         )
     else:
         rules = (
-            Rule(SgmlLinkExtractor(allow='bricopro\.fr/nos-produits/catalogue/\d+/liste.html?page=[0-9]+$', 
+            Rule(SgmlLinkExtractor(allow='bricopro\.fr/nos-produits/catalogue/\d+/liste.html\?page=[0-9]+$', 
                                     restrict_xpaths=['//nav[@class="pagination"]', '//h3[@class="fn"]']),
                 'change_page', follow=True,
             ),  
