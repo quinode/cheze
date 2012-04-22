@@ -10,6 +10,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.utils.encoding import smart_str
 from django.template.defaultfilters import slugify
 from localsite.models import Fournisseur
+from scrapy import log
 
 
 class ChezesasItem(DjangoItem):
@@ -28,22 +29,27 @@ class ChezesasItem(DjangoItem):
         try:
             # on tente de retrouver le meme item
             productattribute = ProductAttribute.objects.get(value=self[settings['FIELD_PRODUCT_URL']])
-            older_item = productattribute.product         
-            # reprise de la meme PK
-            django_item.pk = older_item.pk
-            # nettoyage des données reliées
-            older_item.category.clear()
-            older_item.price_set.all().delete()
-            older_item.productimage_set.all().delete()
-            older_item.productattribute_set.all().delete()
-            fournisseur = older_item.fournisseur_set.all()
-            if len(fournisseur) > 0:
-                fournisseur[0].product.remove(older_item)
-            # effacement de l'ancienne fiche    
-            older_item.delete()    
-            # sauver en DB la nouvelle fiche
-            django_item.save()
-            self.save_related_data(django_item)
+            
+            if settings['UPDATE_ITEMS'] == True:
+                older_item = productattribute.product         
+                # reprise de la meme PK
+                django_item.pk = older_item.pk
+                # nettoyage des données reliées
+                older_item.category.clear()
+                older_item.price_set.all().delete()
+                older_item.productimage_set.all().delete()
+                older_item.productattribute_set.all().delete()
+                fournisseur = older_item.fournisseur_set.all()
+                if len(fournisseur) > 0:
+                    fournisseur[0].product.remove(older_item)
+                # effacement de l'ancienne fiche    
+                older_item.delete()    
+                # sauver en DB la nouvelle fiche
+                django_item.save()
+                self.save_related_data(django_item)
+            else:
+                log.msg(u" ITEM ALREADY in DB, NOT UPDATED: %s" % self[settings['FIELD_PRODUCT_URL']], level=log.DEBUG)
+                return None
 
         except ProductAttribute.DoesNotExist:
             # l'article n'est pas encore en base
