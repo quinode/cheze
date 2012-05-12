@@ -44,7 +44,8 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     <div class="grid_5 blanc">    
         {% for pic in product.productimage_set.all %}
             {% thumbnail pic.picture 380x380 as image %}
-            <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
+            <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" 
+                alt="{{product.translated_name}}"/>
         {% endfor %}
         
     </div>

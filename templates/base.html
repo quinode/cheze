@@ -29,7 +29,7 @@
         <div id="entete_liserai_jaune">
             <div id="entete" class="container_12">
                 <a href="/" title="accueil">
-                    <img src="{{ STATIC_URL }}images/logo-cheze.png" alt="CHEZE SAS" id="logo" border="0" /></a>
+                    <img src="{{ STATIC_URL }}images/logo-cheze.png" alt="CHEZE SAS" id="logo"/></a>
 {% comment %}
                 {% categories deep=3 select_parents=1 ul_class=nav %}
 {% endcomment %}
@@ -47,7 +47,8 @@
                             <a href="{{sc.get_absolute_url}}">
                             {% if sc.images.all.count > 0 %}<img src="{{media_url}}{{ sc.main_image.picture }}" 
                                 width="{{ sc.main_image.picture.width }}" 
-                                height="{{ sc.main_image.picture.height }}"/><br/>{% endif %}{{sc.name}}</a>
+                                height="{{ sc.main_image.picture.height }}"
+                                alt="{{sc.name}}"/><br/>{% endif %}{{sc.name}}</a>
                                 {% if sc.get_all_children %}<ul class="subcats level3">
                                     {% for ssc in sc.get_all_children %}{% if ssc.parent_id == sc.id %}
                                         <li><a href="{{ssc.get_absolute_url}}">{{ssc.name}}</a></li>
@@ -87,7 +88,7 @@
             <div class="grid_4">
                 <div class="clearfix">
                     <div class="picture">
-                        <img src="{{STATIC_URL}}images/magasin.jpg" width="102" heihgt="78" alt="Cheze SAS"/>
+                        <img src="{{STATIC_URL}}images/magasin.jpg" width="102" height="78" alt="Cheze SAS"/>
                     </div>
                     <div class="coord">
                         <address>
