@@ -151,7 +151,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     <div rel="gr:hasPriceSpecification">
       <div typeof="gr:UnitPriceSpecification">
         <div property="gr:hasCurrency" content="EUR" datatype="xsd:string"></div>
-        <div property="gr:hasCurrencyValue" content="{{ product|sale_price }}" datatype="xsd:float"></div>
+        <div property="gr:hasCurrencyValue" content="{{ product|sale_price|currency }}" datatype="xsd:float"></div>
         <div property="gr:hasUnitOfMeasurement" content="C62" datatype="xsd:string"></div>
       </div>
     </div>
